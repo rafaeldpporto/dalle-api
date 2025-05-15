@@ -1,9 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const fetch = require("node-fetch");
 require("dotenv").config();
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 app.post("/gerar-imagem", async (req, res) => {
