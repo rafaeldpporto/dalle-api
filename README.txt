@@ -1,1 +1,1 @@
-Atualize seu GitHub com estes arquivos para testar sua chave da OpenAI com debug nos logs do Render.
+Prompt fixo incluído para testar geração de imagem segura no DALL·E.

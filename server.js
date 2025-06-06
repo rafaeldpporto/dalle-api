@@ -9,7 +9,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.post("/gerar-imagem", async (req, res) => {
-  const { prompt } = req.body;
+  // Prompt fixo para teste
+  const prompt = "Crie uma arte de adesivo redondo com fundo amarelo e tema de floricultura com flores delicadas e logo fictício.";
 
   try {
     const response = await fetch("https://api.openai.com/v1/images/generations", {
@@ -27,7 +28,7 @@ app.post("/gerar-imagem", async (req, res) => {
     });
 
     const data = await response.json();
-    console.log("🧠 RESPOSTA DA OPENAI:", data); // Linha de debug
+    console.log("🧠 RESPOSTA DA OPENAI:", data);
 
     if (data.data && data.data[0]?.url) {
       res.json({ url: data.data[0].url });
