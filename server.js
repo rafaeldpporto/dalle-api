@@ -27,6 +27,7 @@ app.post("/gerar-imagem", async (req, res) => {
     });
 
     const data = await response.json();
+    console.log("🧠 RESPOSTA DA OPENAI:", data); // Linha de debug
 
     if (data.data && data.data[0]?.url) {
       res.json({ url: data.data[0].url });
