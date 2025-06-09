@@ -1,5 +1,5 @@
 {
-  "name": "dalle-api",
+  "name": "dalle-api-base64",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {

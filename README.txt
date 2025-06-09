@@ -1,1 +1,1 @@
-Prompt otimizado para melhor fidelidade visual. Atualize seu GitHub para redeploy automático no Render.
+Versão do backend que retorna imagem em base64 para uso em canvas sem CORS.

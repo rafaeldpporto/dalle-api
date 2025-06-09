@@ -6,12 +6,10 @@ require("dotenv").config();
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "10mb" }));
 
 app.post("/gerar-imagem", async (req, res) => {
-  const { ramo, marca, whats, insta } = req.body;
-
-  const prompt = `Crie uma arte de adesivo redondo para uma marca do ramo "${ramo}" chamada "${marca}". Estilo moderno e atrativo, com elementos visuais representando o setor. Deixe espaço visual na arte para colocar número de WhatsApp (${whats}) e Instagram (@${insta}), mas sem escrever os dados.`;
+  const { prompt } = req.body;
 
   try {
     const response = await fetch("https://api.openai.com/v1/images/generations", {
@@ -29,19 +27,24 @@ app.post("/gerar-imagem", async (req, res) => {
     });
 
     const data = await response.json();
-    console.log("🧠 RESPOSTA DA OPENAI:", data);
+    const imageUrl = data?.data?.[0]?.url;
 
-    if (data.data && data.data[0]?.url) {
-      res.json({ url: data.data[0].url });
-    } else {
-      res.status(500).json({ error: "Erro ao gerar imagem", details: data });
+    if (!imageUrl) {
+      return res.status(500).json({ error: "URL de imagem não encontrada", details: data });
     }
+
+    const imageResponse = await fetch(imageUrl);
+    const buffer = await imageResponse.buffer();
+    const base64Image = buffer.toString("base64");
+    const mimeType = imageResponse.headers.get("content-type");
+
+    res.json({ base64: `data:${mimeType};base64,${base64Image}` });
   } catch (error) {
-    res.status(500).json({ error: "Erro na requisição", details: error.message });
+    res.status(500).json({ error: "Erro ao gerar ou converter imagem", details: error.message });
   }
 });
 
-app.get("/", (_, res) => res.send("API DALL·E está rodando."));
+app.get("/", (_, res) => res.send("API DALL·E com base64 rodando."));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
