@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.post("/gerar-imagem", async (req, res) => {
   const { ramo, marca, whats, insta } = req.body;
 
-  const prompt = `Crie uma arte de adesivo redondo para o ramo "${ramo}" com o nome da marca "${marca}". Incluir visual moderno e espaço para WhatsApp (${whats}) e Instagram (${insta}).`;
+  const prompt = `Crie uma arte de adesivo redondo para uma marca do ramo "${ramo}" chamada "${marca}". Estilo moderno e atrativo, com elementos visuais representando o setor. Deixe espaço visual na arte para colocar número de WhatsApp (${whats}) e Instagram (@${insta}), mas sem escrever os dados.`;
 
   try {
     const response = await fetch("https://api.openai.com/v1/images/generations", {

@@ -1,1 +1,1 @@
-Versão final com prompt dinâmico ativado. Atualize seu GitHub e aguarde novo deploy automático no Render.
+Prompt otimizado para melhor fidelidade visual. Atualize seu GitHub para redeploy automático no Render.
