@@ -1,1 +1,1 @@
-Prompt fixo incluído para testar geração de imagem segura no DALL·E.
+Versão final com prompt dinâmico ativado. Atualize seu GitHub e aguarde novo deploy automático no Render.
